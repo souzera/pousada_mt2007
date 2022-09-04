@@ -13,5 +13,8 @@ class ReservaDAO:
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
 
-    def salvar(self):
-        pass
+    # TODO implement
+        # GET_ALL
+        # SAVE
+        # EXCLUDE
+        # UPDATE

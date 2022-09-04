@@ -14,6 +14,10 @@ class ClienteDAO:
     def __init__(self):
         self.database = ConnectDataBase.get_instance()
 
+    # TODO implement
+        # EXCLUDE
+        # UPDATE
+
     def salvar(self, cliente):
         if cliente.id is None:
             cursor = self.database.cursor()

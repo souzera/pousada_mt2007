@@ -11,6 +11,12 @@ class UsuarioDAO:
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
 
+    # TODO implement
+        # GET_ALL
+        # SAVE
+        # EXCLUDE
+        # UPDATE
+
     def salvar(self):
         pass
 
