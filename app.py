@@ -1,6 +1,9 @@
 from flask import Flask
 
+from modulos.cliente.controller import app_cliente
+
 app = Flask(__name__)
+app.register_blueprint(app_cliente)
 #app.register_blueprint()
 
 @app.route('/')

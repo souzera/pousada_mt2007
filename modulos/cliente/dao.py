@@ -12,7 +12,7 @@ class ClienteDAO:
     _SELECT_BY_CPF = "SELECT * FROM {} WHERE cpf ILIKE '{}'"
 
     def __init__(self):
-        self.database = ConnectDataBase.get_instance()
+        self.database = ConnectDataBase().get_instance()
 
     # TODO implement
         # EXCLUDE
