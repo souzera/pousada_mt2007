@@ -15,6 +15,17 @@ class ReservaDAO:
 
     # TODO implement
         # GET_ALL
-        # SAVE
         # EXCLUDE
         # UPDATE
+
+    def salvar(self, reserva):
+        if reserva.id is None:
+            cursor = self.database.cursor()
+            cursor.execute(self._INSERT_INTO,(reserva.cliente.id, reserva.comodo.id, reserva.status))
+            id = cursor.fetchone()[0]
+            self.database.commit()
+            cursor.close()
+            reserva.id = id
+            return reserva
+        else:
+            raise Exception('Não foi possivel salvar')

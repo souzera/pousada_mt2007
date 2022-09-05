@@ -24,7 +24,7 @@ class ComodoDAO:
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
-            comodo.id=id
+            comodo.id = id
             return comodo
         else:
             raise Exception('Não foi possivel salvar')
