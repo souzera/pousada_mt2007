@@ -1,4 +1,5 @@
 from database.connect import ConnectDataBase
+from modulos.comodo.comodo import Comodo
 
 class ComodoDAO:
 
@@ -13,7 +14,6 @@ class ComodoDAO:
         self.database = ConnectDataBase().get_instance()
 
     #TODO implement
-        # GET_ALL
         # EXCLUDE
         # UPDATE
 
@@ -28,3 +28,16 @@ class ComodoDAO:
             return comodo
         else:
             raise Exception('Não foi possivel salvar')
+
+    def get_all(self):
+        comodos = []
+        cursor = self.database.cursor()
+        cursor.execute(self._SELECT_ALL)
+        all_comodos = cursor.fetchall()
+        colluns_name = [desc[0] for desc in cursor.description]
+        for comodo_query in all_comodos:
+            data = dict(zip(colluns_name, comodo_query))
+            comodo = Comodo(**data)
+            comodos.append(comodo)
+        cursor.close()
+        return comodos
