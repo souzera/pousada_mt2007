@@ -17,8 +17,18 @@ class UsuarioDAO:
         # EXCLUDE
         # UPDATE
 
-    def salvar(self):
-        pass
+    def salvar(self, usuario):
+        if usuario.id is None:
+            cursor = self.database.cursor()
+            cursor.execute(self._INSERT_INTO,(usuario.username, usuario.senha, usuario.status))
+            id = cursor.fetchone()[0]
+            self.database.commit()
+            cursor.close()
+            usuario.id = id
+            return usuario
+        else:
+            raise Exception('Não foi possivel salvar')
+
 
     def get_all(self):
         pass
