@@ -35,10 +35,7 @@ class ClienteDAO:
         cursor = self.database.cursor()
         cursor.execute(self._SELECT_ALL)
         all_clientes = cursor.fetchall()
-
-        #todo: Pesquisar
         coluns_name = [desc[0] for desc in cursor.description]
-
         for cliente_query in all_clientes:
             data = dict(zip(coluns_name, cliente_query))
             cliente = Cliente(**data)
