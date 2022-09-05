@@ -3,7 +3,7 @@ from modulos.cliente.cliente import Cliente
 
 class ClienteDAO:
 
-    _TABLE_NAME = 'cliente'
+    _TABLE_NAME = 'clientes'
 
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(nome, cpf, telefone,' \
                    f' dtNascimento, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
@@ -21,7 +21,7 @@ class ClienteDAO:
     def salvar(self, cliente):
         if cliente.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, cliente.endereco, cliente.telefone, cliente.dtNascimento, cliente.sexo))
+            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, cliente.endereco, cliente.telefone, cliente.dtNasc, cliente.sexo))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()

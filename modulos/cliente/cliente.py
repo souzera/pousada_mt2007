@@ -1,11 +1,11 @@
 class Cliente:
 
-    def __init__(self, nome, cpf, telefone, dtNascimento, endereco, sexo, id=None):
+    def __init__(self, nome, cpf, telefone, dtNasc, endereco, sexo, id=None):
         self.id = id
         self.nome = nome
         self.cpf = cpf
         self.telefone = telefone
-        self.dtNascimento = dtNascimento
+        self.dtNasc = dtNasc
         self.endereco = endereco
         self.sexo = sexo
 
@@ -18,6 +18,6 @@ class Cliente:
                 'nome': self.nome,
                 'cpf': self.cpf,
                 'telefone': self.telefone,
-                'dtNascimento': self.dtNascimento,
+                'dtNascimento': self.dtNasc,
                 'endereco': self.endereco,
                 'sexo': self.sexo}
