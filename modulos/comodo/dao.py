@@ -20,7 +20,7 @@ class ComodoDAO:
     def salvar(self, comodo):
         if comodo.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO, (comodo.decricao, comodo.valor_diaria, comodo.status))
+            cursor.execute(self._INSERT_INTO, (comodo.descricao, comodo.valor_diaria, comodo.status))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()

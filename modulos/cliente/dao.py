@@ -1,4 +1,6 @@
 from database.connect import ConnectDataBase
+from datetime import datetime, date
+
 from modulos.cliente.cliente import Cliente
 
 class ClienteDAO:
@@ -21,7 +23,8 @@ class ClienteDAO:
     def salvar(self, cliente):
         if cliente.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, cliente.endereco, cliente.telefone, cliente.dtNasc, cliente.sexo))
+            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, cliente.endereco,
+                                               cliente.telefone, cliente.dtNasc, cliente.sexo))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
@@ -42,3 +45,7 @@ class ClienteDAO:
             clientes.append(cliente)
         cursor.close()
         return clientes
+
+    def to_url(self, value):
+        if isinstance(value, date):
+            return value.strftime('%Y-%m-%d')
