@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, make_response
 
 from modulos.comodo.dao import ComodoDAO
 
-_app = Blueprint('example_blueprint', __name__)
+_app = Blueprint('comodo_blueprint', __name__)
 app_name = 'comodo'
 dao_comodo = ComodoDAO()
 

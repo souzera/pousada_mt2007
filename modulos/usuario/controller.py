@@ -2,7 +2,7 @@ from flask import jsonify, make_response, Blueprint
 
 from modulos.usuario.dao import UsuarioDAO
 
-_app = Blueprint('example_blueprint', __name__)
+_app = Blueprint('usuario_blueprint', __name__)
 app_name = 'users'
 dao_usuario = UsuarioDAO()
 
