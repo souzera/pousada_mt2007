@@ -10,7 +10,7 @@ class ClienteDAO:
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(nome, cpf, telefone,' \
                    f' dtNascimento, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
-    _SELECT_BY_ID = 'SELECT * FROM {} WHERE ID={}'
+    _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _SELECT_BY_CPF = "SELECT * FROM {} WHERE cpf ILIKE '{}'"
 
     def __init__(self):
@@ -46,6 +46,12 @@ class ClienteDAO:
         cursor.close()
         return clientes
 
-    def to_url(self, value):
-        if isinstance(value, date):
-            return value.strftime('%Y-%m-%d')
+    def get_by_id(self, id):
+        cursor = self.database.cursor()
+        cursor.execute(self._SELECT_BY_ID, id)
+        coluns_name = [desc[0] for desc in cursor.description]
+        cliente_query = cursor.fetchone()
+        data = dict(zip(coluns_name, cliente_query))
+        cliente = Cliente(**data)
+        cursor.close()
+        return cliente
