@@ -18,6 +18,6 @@ class Cliente:
                 'nome': self.nome,
                 'cpf': self.cpf,
                 'telefone': self.telefone,
-                'dtNascimento': str(self.dtnasc),
+                'dtnasc': str(self.dtnasc),
                 'endereco': self.endereco,
                 'sexo': self.sexo}

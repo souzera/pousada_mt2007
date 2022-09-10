@@ -1,5 +1,6 @@
-from flask import jsonify, make_response, Blueprint
+from flask import jsonify, make_response, Blueprint, request
 
+from modulos.cliente.cliente import Cliente
 from modulos.cliente.dao import ClienteDAO
 
 app_cliente = Blueprint('cliente_blueprint', __name__)
@@ -13,10 +14,12 @@ def get_clientes():
     return make_response(jsonify(data))
 
 @app_cliente.route(f'/{app_name}/add/', methods=['POST'])
-def save_cliente(cliente):
-    cliente = dao_cliente.salvar(cliente)
-    data = cliente.get_data_dict()
-    return make_response(jsonify(data))
+def save_cliente():
+    data = request.get_json()
+    cliente = Cliente(**data)
+    if dao_cliente.salvar(cliente):
+        return make_response(jsonify(data))
+    return 404
 
 @app_cliente.route(f'/{app_name}/<id>', methods=['GET'])
 def get_id(id):

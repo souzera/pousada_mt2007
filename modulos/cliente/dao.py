@@ -8,7 +8,7 @@ class ClienteDAO:
     _TABLE_NAME = 'clientes'
 
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(nome, cpf, telefone,' \
-                   f' dtNascimento, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
+                   f' dtnasc, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _SELECT_BY_CPF = "SELECT * FROM {} WHERE cpf ILIKE '{}'"
@@ -23,8 +23,8 @@ class ClienteDAO:
     def salvar(self, cliente):
         if cliente.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, cliente.endereco,
-                                               cliente.telefone, cliente.dtNasc, cliente.sexo))
+            cursor.execute(self._INSERT_INTO, (cliente.nome, cliente.cpf, str(cliente.telefone),
+                                               cliente.dtnasc, cliente.endereco, cliente.sexo))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
