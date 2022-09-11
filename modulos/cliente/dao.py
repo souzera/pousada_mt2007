@@ -11,7 +11,7 @@ class ClienteDAO:
                    f' dtnasc, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
-    _SELECT_BY_CPF = "SELECT * FROM {} WHERE cpf ILIKE '{}'"
+    _SELECT_BY_CPF = f"SELECT * FROM {_TABLE_NAME} WHERE CPF=%s"
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
@@ -55,3 +55,4 @@ class ClienteDAO:
         cliente = Cliente(**data)
         cursor.close()
         return cliente
+
