@@ -40,3 +40,13 @@ class ComodoDAO:
             comodos.append(comodo)
         cursor.close()
         return comodos
+
+    def get_by_id(self, id):
+        cursor = self.database.cursor()
+        cursor.execute(self._SELECT_BY_ID, id)
+        colluns_name =[desc[0] for desc in cursor.description]
+        comodo_query = cursor.fetchone()
+        data = dict(zip(colluns_name, comodo_query))
+        comodo = Comodo(**data)
+        cursor.close()
+        return comodo
