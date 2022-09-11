@@ -2,12 +2,14 @@ from flask import Flask
 
 from modulos.cliente.controller import app_cliente
 from modulos.comodo.controller import app_comodo
+from modulos.usuario.controller import app_usuario
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
 app.register_blueprint(app_cliente)
 app.register_blueprint(app_comodo)
+app.register_blueprint(app_usuario)
 
 @app.route('/')
 def index():
