@@ -1,6 +1,6 @@
 class Comodo:
 
-    def __init__(self, descricao, valor_diaria, status, id=None):
+    def __init__(self, descricao, valor_diaria, status=True, id=None):
         self.id = id
         self.descricao = descricao
         self.valor_diaria = valor_diaria
