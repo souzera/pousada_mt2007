@@ -14,6 +14,7 @@ class UsuarioDAO:
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
 
+
     # TODO implement
         # GET_ALL
         # EXCLUDE
@@ -22,7 +23,7 @@ class UsuarioDAO:
     def salvar(self, usuario):
         if usuario.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO,(usuario.username, usuario.senha, usuario.status))
+            cursor.execute(self._INSERT_INTO, (usuario.username, usuario.senha, usuario.status))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
@@ -46,3 +47,50 @@ class UsuarioDAO:
         cursor.close()
         return usuarios
 
+    def get_by_id(self, id):
+        cursor = self.database.cursor()
+        cursor.execute(self._SELECT_BY_ID, id)
+        colluns_name = [desc[0] for desc in cursor.description]
+        usuario_query = cursor.fetchone()
+        data = dict(zip(colluns_name, usuario_query))
+        usuario = Usuario(**data)
+        cursor.close()
+        return usuario
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # -=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-= #
+    def validar_senha(self, hashed):
+        if bcrypt.hashpw(password, hashed) == hashed:
+            return True
+        else:
+            return False
+    # -=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-= #
