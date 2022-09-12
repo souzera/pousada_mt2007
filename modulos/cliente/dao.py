@@ -1,5 +1,4 @@
 from database.connect import ConnectDataBase
-from datetime import datetime, date
 
 from modulos.cliente.cliente import Cliente
 
@@ -48,7 +47,7 @@ class ClienteDAO:
 
     def get_by_id(self, id):
         cursor = self.database.cursor()
-        cursor.execute(self._SELECT_BY_ID, id)
+        cursor.execute(self._SELECT_BY_ID, str(id))
         coluns_name = [desc[0] for desc in cursor.description]
         cliente_query = cursor.fetchone()
         data = dict(zip(coluns_name, cliente_query))

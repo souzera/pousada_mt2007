@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS clientes(
 	cpf varchar(32),
 	telefone varchar(32),
 	dtNasc date,
-	endereco varchar(255)
+	endereco varchar(255),
+	sexo char(1) CHECK (sexo in ('m', 'f'))
 );
 
 CREATE TABLE IF NOT EXISTS comodos(
@@ -25,8 +26,8 @@ CREATE TABLE IF NOT EXISTS reservas(
     id serial PRIMARY KEY,
 	checkin date,
 	checkout date,
-    id_cliente int references clientes(id),
-    id_comodo int references comodos(id),
+    cliente_id int references clientes(id),
+    comodo_id int references comodos(id),
     status bool
 );
 
