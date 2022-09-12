@@ -26,3 +26,7 @@ def get_id(id):
     usuario = dao_usuario.get_by_id(id)
     data = usuario.get_data_dict()
     return make_response(jsonify(data))
+
+@app_usuario.route(f'/{app_name}/del/<id>', methods=['DELETE'])
+def delete_id(id):
+    return dao_usuario.delete_by_id(id)

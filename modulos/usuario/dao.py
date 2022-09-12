@@ -59,6 +59,14 @@ class UsuarioDAO:
         cursor.close()
         return usuario
 
+    def delete_by_id(self, id):
+        username = self.get_by_id(id).username
+        cursor = self.database.cursor()
+        cursor.execute(self._DELETE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'{username} foi excluído.'
+
     def get_all_username(self):
         usernames = []
         for user in self.get_all():
