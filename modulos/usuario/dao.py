@@ -3,11 +3,11 @@ from modulos.usuario.usuario import Usuario
 
 
 class UsuarioDAO:
-    _TABLE_NAME = 'usuario'
+    _TABLE_NAME = 'usuarios'
 
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(username, senha, status) VALUES(%s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
-    _SELECT_BY_ID = 'SELECT * FROM {} WHERE ID={}'
+    _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _SELECT_BY_USERNAME = "SELECT * FROM {} WHERE username ILIKE '{}'"
     _SELECT_BY_STATUS = "SELECT * FROM {} WHERE status ILIKE '{}'"
 
@@ -16,11 +16,14 @@ class UsuarioDAO:
 
 
     # TODO implement
-        # GET_ALL
         # EXCLUDE
         # UPDATE
 
     def salvar(self, usuario):
+
+        if self.get_all_username().__contains__(usuario.username):
+            raise Exception('Usuario já existe')
+
         if usuario.id is None:
             cursor = self.database.cursor()
             cursor.execute(self._INSERT_INTO, (usuario.username, usuario.senha, usuario.status))
@@ -57,6 +60,11 @@ class UsuarioDAO:
         cursor.close()
         return usuario
 
+    def get_all_username(self):
+        usernames = []
+        for user in self.get_all():
+            usernames.append(user.username)
+        return usernames
 
 
 
