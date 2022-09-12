@@ -10,7 +10,7 @@ class ClienteDAO:
                    f' dtnasc, endereco, sexo) VALUES(%s, %s, %s, %s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
-    _SELECT_BY_CPF = f"SELECT * FROM {_TABLE_NAME} WHERE CPF=%s"
+    _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()

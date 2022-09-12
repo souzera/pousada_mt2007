@@ -8,8 +8,7 @@ class UsuarioDAO:
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(username, senha, status) VALUES(%s, %s, %s) RETURNING id'
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
-    _SELECT_BY_USERNAME = "SELECT * FROM {} WHERE username ILIKE '{}'"
-    _SELECT_BY_STATUS = "SELECT * FROM {} WHERE status ILIKE '{}'"
+    _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
