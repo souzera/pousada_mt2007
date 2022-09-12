@@ -55,3 +55,11 @@ class ClienteDAO:
         cursor.close()
         return cliente
 
+    def delete_by_id(self, id):
+        cliente_name = self.get_by_id(id).nome
+        cursor = self.database.cursor()
+        cursor.execute(self._DELETE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'{cliente_name} foi excluído(a).'
+
