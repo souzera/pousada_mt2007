@@ -54,3 +54,11 @@ class ReservaDAO:
         reserva = Reserva(**data)
         cursor.close()
         return reserva
+
+    def delete_by_id(self, id):
+        reserva_id = self.get_by_id(id).id
+        cursor = self.database.cursor()
+        cursor.execute(self._DELETE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'A Reserva {reserva_id} foi excluída.'
