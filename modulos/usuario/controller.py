@@ -18,7 +18,7 @@ def save_usuario():
     data = request.get_json()
     usuario = Usuario(**data)
     if dao_usuario.salvar(usuario):
-        return 201
+        return make_response(jsonify(data))
     return 404
 
 @app_usuario.route(f'/{app_name}/<id>', methods=['GET'])
