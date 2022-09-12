@@ -51,3 +51,11 @@ class ComodoDAO:
         comodo = Comodo(**data)
         cursor.close()
         return comodo
+
+    def delete_by_id(self, id):
+        comodo_desc = self.get_by_id().descricao
+        cursor = self.database.cursor()
+        cursor.execute(self._DELETE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'{comodo_desc} foi excluído(a).'

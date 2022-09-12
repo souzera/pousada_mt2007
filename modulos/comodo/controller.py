@@ -26,3 +26,7 @@ def get_id(id):
     comodo = dao_comodo.get_by_id(id)
     data = comodo.get_data_dict()
     return make_response(jsonify(data))
+
+@app_comodo.route(f'/{app_name}/del/<id>', methods=['DELETE'])
+def delete_id(id):
+    return dao_comodo.delete_by_id(id)
