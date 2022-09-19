@@ -9,13 +9,14 @@ class UsuarioDAO:
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
+    _DISABLE_BY_ID = f'UPDATE {_TABLE_NAME} SET status=false WHERE ID=%s'
+    _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET username= %s, senha=%s, status=%s WHERE id=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
 
 
     # TODO implement
-        # EXCLUDE
         # UPDATE
 
     def salvar(self, usuario):
@@ -66,6 +67,21 @@ class UsuarioDAO:
         self.database.commit()
         cursor.close()
         return f'{username} foi excluído.'
+
+    def disable_by_id(self, id):
+        username = self.get_by_id(id).username
+        cursor = self.database.cursor()
+        cursor.execute(self._DISABLE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'{username} foi desativado.'
+
+    def update_usuario(self, usuario):
+        cursor = self.database.cursor()
+        cursor.execute(self._UPDATE_BY_ID, (usuario.username, usuario.senha, usuario.status, usuario.id))
+        self.database.commit()
+        cursor.close()
+        return self.get_by_id(str(usuario.id))
 
     def get_all_username(self):
         usernames = []

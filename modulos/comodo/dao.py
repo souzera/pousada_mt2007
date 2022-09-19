@@ -16,7 +16,6 @@ class ComodoDAO:
         self.database = ConnectDataBase().get_instance()
 
     #TODO implement
-        # EXCLUDE
         # UPDATE
 
     def salvar(self, comodo):
@@ -70,7 +69,7 @@ class ComodoDAO:
         cursor.close()
         return f'{comodo_desc} foi desativado(a).'
 
-    def update_by_id(self, comodo):
+    def update_comodo(self, comodo):
         cursor = self.database.cursor()
         cursor.execute(self._UPDATE_BY_ID, (comodo.descricao, comodo.valor_diaria, comodo.status, str(comodo.id)))
         self.database.commit()

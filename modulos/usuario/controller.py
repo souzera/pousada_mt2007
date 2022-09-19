@@ -30,3 +30,15 @@ def get_id(id):
 @app_usuario.route(f'/{app_name}/del/<id>', methods=['DELETE'])
 def delete_id(id):
     return dao_usuario.delete_by_id(id)
+
+@app_usuario.route(f'/{app_name}/disable/<id>', methods=['PATCH'])
+def disable_id(id):
+    return dao_usuario.disable_by_id(id)
+
+@app_usuario.route(f'/{app_name}/att', methods=['PUT'])
+def update_usuario():
+    data = request.get_json()
+    usuario = Usuario(**data)
+    if dao_usuario.update_usuario(usuario):
+        return make_response(jsonify(data))
+    return 404

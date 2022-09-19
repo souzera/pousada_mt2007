@@ -39,6 +39,6 @@ def disable_id(id):
 def update_comodo():
     data = request.get_json()
     comodo = Comodo(**data)
-    if dao_comodo.update_by_id(comodo):
+    if dao_comodo.update_comodo(comodo):
         return make_response(jsonify(data))
     return 404
