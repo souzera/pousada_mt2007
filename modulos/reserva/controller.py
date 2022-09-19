@@ -30,3 +30,15 @@ def get_id(id):
 @app_reserva.route(f'/{app_name}/del/<id>', methods=['DELETE'])
 def delete_id(id):
     return dao_reserva.delete_by_id(id)
+
+@app_reserva.route(f'/{app_name}/disable/<id>', methods=['PATCH'])
+def disable_id(id):
+    return dao_reserva.disable_by_id(id)
+
+@app_reserva.route(f'/{app_name}/att', methods=['PUT'])
+def update_reserva():
+    data = request.get_json()
+    reserva = Reserva(**data)
+    if dao_reserva.update_by_id(reserva):
+        return make_response(jsonify(data))
+    return 404
