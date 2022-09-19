@@ -18,7 +18,7 @@ def save_reserva():
     data = request.get_json()
     reserva = Reserva(**data)
     if dao_reserva.salvar(reserva):
-        return make_response(jsonify(data))
+        return make_response(jsonify(reserva.get_data_dict()))
     return 404
 
 @app_reserva.route(f'/{app_name}/<id>', methods=['GET'])
@@ -40,5 +40,5 @@ def update_reserva():
     data = request.get_json()
     reserva = Reserva(**data)
     if dao_reserva.update_by_id(reserva):
-        return make_response(jsonify(data))
+        return make_response(jsonify(reserva.get_data_dict()))
     return 404

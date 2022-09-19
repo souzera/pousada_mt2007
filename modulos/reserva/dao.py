@@ -3,7 +3,6 @@ from modulos.reserva.reserva import Reserva
 
 
 class ReservaDAO:
-
     _TABLE_NAME = 'reservas'
 
     _INSERT_INTO = f'INSERT INTO {_TABLE_NAME}(checkin, checkout, cliente_id, comodo_id, status) ' \
@@ -13,21 +12,16 @@ class ReservaDAO:
     _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
     _DISABLE_BY_ID = f'UPDATE {_TABLE_NAME} SET status=false WHERE id=%s'
     _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET checkin=%s, checkout=%s, cliente_id=%s, comodo_id=%s, status=%s ' \
-                        f'WHERE id=%s'
+                    f'WHERE id=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
-
-    # TODO implement
-        # GET_ALL
-        # EXCLUDE
-        # UPDATE
 
     def salvar(self, reserva):
         if reserva.id is None:
             cursor = self.database.cursor()
             cursor.execute(self._INSERT_INTO, (reserva.checkin, reserva.checkout, reserva.cliente_id,
-                                              reserva.comodo_id, reserva.status))
+                                               reserva.comodo_id, reserva.status))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
