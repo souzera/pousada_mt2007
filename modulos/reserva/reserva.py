@@ -19,15 +19,14 @@ class Reserva:
         return {'id': self.id,
                 'checkin': self.checkin,
                 'checkout': self.checkout,
-                'cliente_id': self.cliente_id,
-                'comodo_id': self.comodo_id,
+                'cliente': self.get_cliente().get_data_dict(),
+                'comodo': self.get_comodo().get_data_dict(),
                 'status': self.status}
 
     def get_cliente(self):
         dao_cliente = ClienteDAO()
-        cliente = dao_cliente.get_by_id(self.cliente_id)
-        return dao_cliente.get_by_id(self.cliente_id)
+        return dao_cliente.get_by_id(str(self.cliente_id))
 
     def get_comodo(self):
         dao_comodo = ComodoDAO()
-        return dao_comodo.get_by_id(self.comodo_id)
+        return dao_comodo.get_by_id(str(self.comodo_id))
