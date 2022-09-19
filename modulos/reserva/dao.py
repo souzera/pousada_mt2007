@@ -12,7 +12,7 @@ class ReservaDAO:
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
     _DISABLE_BY_ID = f'UPDATE {_TABLE_NAME} SET status=false WHERE id=%s'
-    _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET checkin=%s, checkout=%s, cliente_id=%s, comodo_id=%s, status=%s' \
+    _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET checkin=%s, checkout=%s, cliente_id=%s, comodo_id=%s, status=%s ' \
                         f'WHERE id=%s'
 
     def __init__(self):
@@ -81,4 +81,4 @@ class ReservaDAO:
                                             reserva.comodo_id, reserva.status, reserva.id))
         self.database.commit()
         cursor.close()
-        return self.get_by_id(reserva.id)
+        return self.get_by_id(str(reserva.id))

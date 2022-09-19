@@ -12,8 +12,9 @@ CREATE TABLE IF NOT EXISTS clientes(
 	telefone varchar(32),
 	dtNasc date,
 	endereco varchar(255),
-	sexo char(1) CHECK (sexo in ('m', 'f'))
-);
+	sexo char(1) CHECK (sexo in ('m', 'f')));
+
+ALTER TABLE clientes ADD IF NOT EXISTS status bool NULL ;
 
 CREATE TABLE IF NOT EXISTS comodos(
     id serial PRIMARY KEY,

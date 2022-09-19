@@ -31,3 +31,14 @@ def get_id(id):
 def delete_id(id):
     return dao_cliente.delete_by_id(id)
 
+@app_cliente.route(f'/{app_name}/disable/<id>', methods=['PATCH'])
+def disable_id(id):
+    return dao_cliente.disable_by_id(id)
+
+@app_cliente.route(f'/{app_name}/att', methods=['PUT'])
+def update_reserva():
+    data = request.get_json()
+    cliente = Cliente(**data)
+    if dao_cliente.update_by_id(cliente):
+        return make_response(jsonify(data))
+    return 404
