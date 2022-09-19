@@ -9,6 +9,8 @@ class ComodoDAO:
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
+    _DISABLE_BY_ID = f'UPDATE {_TABLE_NAME} SET status=false WHERE ID=%s'
+    _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET descricao= %s, valor_diaria=%s, status=%s WHERE id=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
@@ -53,9 +55,24 @@ class ComodoDAO:
         return comodo
 
     def delete_by_id(self, id):
-        comodo_desc = self.get_by_id().descricao
+        comodo_desc = self.get_by_id(id).descricao
         cursor = self.database.cursor()
         cursor.execute(self._DELETE_BY_ID, id)
         self.database.commit()
         cursor.close()
         return f'{comodo_desc} foi excluído(a).'
+
+    def disable_by_id(self, id):
+        comodo_desc = self.get_by_id(id).descricao
+        cursor = self.database.cursor()
+        cursor.execute(self._DISABLE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'{comodo_desc} foi desativado(a).'
+
+    def update_by_id(self, comodo):
+        cursor = self.database.cursor()
+        cursor.execute(self._UPDATE_BY_ID, (comodo.descricao, comodo.valor_diaria, comodo.status, str(comodo.id)))
+        self.database.commit()
+        cursor.close()
+        return self.get_by_id(str(comodo.id))

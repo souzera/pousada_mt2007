@@ -14,7 +14,7 @@ def get_comodos():
     return make_response(jsonify(data))
 
 @app_comodo.route(f'/{app_name}/add/', methods=['POST'])
-def save_cliente():
+def save_comodo():
     data = request.get_json()
     comodo = Comodo(**data)
     if dao_comodo.salvar(comodo):
@@ -30,3 +30,15 @@ def get_id(id):
 @app_comodo.route(f'/{app_name}/del/<id>', methods=['DELETE'])
 def delete_id(id):
     return dao_comodo.delete_by_id(id)
+
+@app_comodo.route(f'/{app_name}/disable/<id>', methods=['PATCH'])
+def disable_id(id):
+    return dao_comodo.disable_by_id(id)
+
+@app_comodo.route(f'/{app_name}/att', methods=['PUT'])
+def update_comodo():
+    data = request.get_json()
+    comodo = Comodo(**data)
+    if dao_comodo.update_by_id(comodo):
+        return make_response(jsonify(data))
+    return 404
