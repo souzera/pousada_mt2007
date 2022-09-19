@@ -16,9 +16,6 @@ class UsuarioDAO:
         self.database = ConnectDataBase().get_instance()
 
 
-    # TODO implement
-        # UPDATE
-
     def salvar(self, usuario):
 
         if self.get_all_username().__contains__(usuario.username):

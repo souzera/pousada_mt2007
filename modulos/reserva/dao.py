@@ -11,6 +11,9 @@ class ReservaDAO:
     _SELECT_ALL = f'SELECT * FROM {_TABLE_NAME}'
     _SELECT_BY_ID = f'SELECT * FROM {_TABLE_NAME} WHERE ID=%s'
     _DELETE_BY_ID = f'DELETE FROM {_TABLE_NAME} WHERE ID=%s'
+    _DISABLE_BY_ID = f'UPDATE {_TABLE_NAME} SET status=false WHERE id=%s'
+    _UPDATE_BY_ID = f'UPDATE {_TABLE_NAME} SET checkin=%s, checkout=%s, cliente_id=%s, comodo_id=%s, status=%s' \
+                        f'WHERE id=%s'
 
     def __init__(self):
         self.database = ConnectDataBase().get_instance()
@@ -23,7 +26,8 @@ class ReservaDAO:
     def salvar(self, reserva):
         if reserva.id is None:
             cursor = self.database.cursor()
-            cursor.execute(self._INSERT_INTO,(reserva.checkin, reserva.checkout, reserva.cliente_id, reserva.comodo_id, reserva.status))
+            cursor.execute(self._INSERT_INTO, (reserva.checkin, reserva.checkout, reserva.cliente_id,
+                                              reserva.comodo_id, reserva.status))
             id = cursor.fetchone()[0]
             self.database.commit()
             cursor.close()
@@ -62,3 +66,19 @@ class ReservaDAO:
         self.database.commit()
         cursor.close()
         return f'A Reserva {reserva_id} foi excluída.'
+
+    def disable_by_id(self, id):
+        reserva_id = self.get_by_id(id).id
+        cursor = self.database.cursor()
+        cursor.execute(self._DISABLE_BY_ID, id)
+        self.database.commit()
+        cursor.close()
+        return f'A Reserva {reserva_id} foi desativada.'
+
+    def update_by_id(self, reserva):
+        cursor = self.database.cursor()
+        cursor.execute(self._UPDATE_BY_ID, (reserva.checkin, reserva.checkout, reserva.cliente_id,
+                                            reserva.comodo_id, reserva.status, reserva.id))
+        self.database.commit()
+        cursor.close()
+        return self.get_by_id(reserva.id)
