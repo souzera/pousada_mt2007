@@ -1,6 +1,6 @@
 class Cliente:
 
-    def __init__(self, nome, cpf, telefone, dtnasc, endereco, sexo, id=None):
+    def __init__(self, nome, cpf, telefone, dtnasc, endereco, sexo, status=True, id=None):
         self.id = id
         self.nome = nome
         self.cpf = cpf
@@ -8,6 +8,7 @@ class Cliente:
         self.dtnasc = dtnasc
         self.endereco = endereco
         self.sexo = sexo
+        self.status = status
 
     def __str__(self):
         return f'Nome: {self.nome}\n\t Telefone: {self.telefone}\n\t' \
@@ -20,4 +21,5 @@ class Cliente:
                 'telefone': self.telefone,
                 'dtnasc': str(self.dtnasc),
                 'endereco': self.endereco,
-                'sexo': self.sexo}
+                'sexo': self.sexo,
+                'status':self.status}
