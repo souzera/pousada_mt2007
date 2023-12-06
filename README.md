@@ -34,7 +34,7 @@ Projeto construído para servir de base para construção de aplicação para au
 
 ### Como foi desenvolvido?
 
-O projeto foi desenvolvido em python utilizando o banco de dados Postgresql. Além disso foram feito utilizadas as bibliotecas pycopgg2 e flask também tive auxilio da ferramenta Postman para reaalizar os teste durante o desenvolvimento.
+O projeto foi desenvolvido em python utilizando o banco de dados Postgresql. Além disso foram feito utilizadas as bibliotecas pycopgg2 e flask também tive auxilio da ferramenta Postman para realizar os teste durante o desenvolvimento.
 
 ### Como foi implementado?
 
